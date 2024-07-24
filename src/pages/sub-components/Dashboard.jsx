@@ -32,6 +32,7 @@ import { toast } from "react-toastify";
 import SpecialLoadingButton from "./SpecialLoadingButton";
 import { clearAllTimelineErrors } from "@/store/slices/timelineSlice";
 import { clearAllProjectErrors } from "@/store/slices/projectSlice";
+
 const Dashboard = () => {
   const navigateTo = useNavigate();
   const gotoMangeSkills = () => {
@@ -110,6 +111,10 @@ const Dashboard = () => {
     timelineMessage,
   ]);
 
+  const handleVisitPortfolio = () => {
+    window.open("https://main-portfolio-iota-gold.vercel.app", "_blank");
+  };
+
   return (
     <>
       <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
@@ -123,7 +128,7 @@ const Dashboard = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardFooter>
-                  <Button>Visit Portfolio</Button>
+                  <Button onClick={handleVisitPortfolio}>Visit Portfolio</Button>
                 </CardFooter>
               </Card>
               <Card className="flex flex-col justify-center">
