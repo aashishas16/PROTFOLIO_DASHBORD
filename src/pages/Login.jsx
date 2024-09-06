@@ -33,7 +33,7 @@ const Login = () => {
 
   return (
     <div className="w-full lg:grid lg:min-h-[100vh] lg:grid-cols-2 xl:min-h-[100vh]">
-      <div className=" min-h-[100vh] flex items-center justify-center py-12">
+      <div className="min-h-[100vh] flex items-center justify-center py-12">
         <div className="mx-auto grid w-[350px] gap-6">
           <div className="grid gap-2 text-center">
             <h1 className="text-3xl font-bold">Login</h1>
@@ -79,13 +79,32 @@ const Login = () => {
                 Login
               </Button>
             )}
+            <div className="text-center mt-4">
+              <p className="text-sm text-muted-foreground">
+                Don't have an account?{" "}
+                <Link
+                  to="/login"
+                  className="text-blue-500 hover:underline"
+                >
+                  Sign Up
+                </Link>
+              </p>
+            </div>
+            <div>
+        <h1 className="font-bold">Demo  Credentials :</h1>
+        <p> Email :  aashishas16@gmail.com</p>
+        <p> Password : Ashish@123</p>
+      </div>
           </div>
         </div>
       </div>
       <div className="flex justify-center items-center bg-muted">
         <img src="/login.png" alt="login" />
+        
       </div>
-    </div>
+
+   
+    </div>  
   );
 };
 
