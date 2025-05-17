@@ -25,6 +25,19 @@ const userSlice = createSlice({
       state.user = action.payload;
       state.error = null;
     },
+    signupSuccess(state ,action) {
+      state.loading =false;
+      state.isAuthenticated=false;
+      state.user={};
+      state.navigate=true
+      state.error=null;
+    },
+    signupFailed(state ,action) {
+      state.loading = false;
+      state.isAuthenticated = false;
+      state.user = {};
+      state.error = action.payload;
+    },
     loginFailed(state, action) {
       state.loading = false;
       state.isAuthenticated = false;
@@ -112,16 +125,17 @@ const userSlice = createSlice({
 
 export const login = (email, password) => async (dispatch) => {
   dispatch(userSlice.actions.loginRequest());
+console.log(email)
   try {
     const { data } = await axios.post(
       `${BASE_URL}/api/v1/user/login`,
-      { email, password },
+      email,
       { withCredentials: true, headers: { "Content-Type": "application/json" } }
     );
     dispatch(userSlice.actions.loginSuccess(data.user));
     dispatch(userSlice.actions.clearAllErrors());
   } catch (error) {
-    dispatch(userSlice.actions.loginFailed(error.response.data.message));
+    dispatch(userSlice.actions.loginFailed(error.response?.data?.message));
   }
 };
 
@@ -134,12 +148,13 @@ export const getUser = () => async (dispatch) => {
     dispatch(userSlice.actions.loadUserSuccess(data.user));
     dispatch(userSlice.actions.clearAllErrors());
   } catch (error) {
-    dispatch(userSlice.actions.loadUserFailed(error.response.data.message));
+    dispatch(userSlice.actions.loadUserFailed(error.response?.data?.message));
   }
 };
 
 export const logout = () => async (dispatch) => {
   try {
+    console.log(BASE_URL)
     const { data } = await axios.get(
       `${BASE_URL}/api/v1/user/logout`,
       { withCredentials: true }
@@ -197,5 +212,19 @@ export const resetProfile = () => (dispatch) => {
 export const clearAllUserErrors = () => (dispatch) => {
   dispatch(userSlice.actions.clearAllErrors());
 };
-
+export const signup = ( fullName, email, phone, aboutMe, password ) => async (dispatch) => {
+  dispatch(userSlice.actions.loginRequest());
+console.log(email)
+  try {
+    const { data } = await axios.post(
+      `${BASE_URL}/api/v1/user/register`,
+      fullName,
+        { withCredentials: true, headers: { "Content-Type": "application/json" } }
+    );
+    dispatch(userSlice.actions.signupSuccess(data.user));
+    dispatch(userSlice.actions.clearAllErrors());
+  } catch (error) {
+    dispatch(userSlice.actions.signupFailed(error.response?.data?.message))
+  }
+};
 export default userSlice.reducer;

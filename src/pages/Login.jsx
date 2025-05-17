@@ -7,21 +7,20 @@ import { useEffect, useState } from "react";
 import { clearAllUserErrors, login } from "@/store/slices/userSlice";
 import { toast } from "react-toastify";
 import SpecialLoadingButton from "./sub-components/SpecialLoadingButton";
+const BASE_URL = import.meta.env.VITE_BASE_URL
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { loading, isAuthenticated, error } = useSelector(
-    (state) => state.user
-  );
+  const { loading, isAuthenticated, error } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigateTo = useNavigate();
 
   const handleLogin = () => {
-    dispatch(login(email, password));
+    console.log(email,password)
+    dispatch(login({ email, password }));
   };
-
-  useEffect(() => {
+    useEffect(() => {
     if (error) {
       toast.error(error);
       dispatch(clearAllUserErrors());
@@ -29,20 +28,18 @@ const Login = () => {
     if (isAuthenticated) {
       navigateTo("/");
     }
-  }, [dispatch, isAuthenticated, error, loading]);
+  }, [dispatch, isAuthenticated, error]);
 
   return (
-    <div className="w-full lg:grid lg:min-h-[100vh] lg:grid-cols-2 xl:min-h-[100vh]">
-      <div className="min-h-[100vh] flex items-center justify-center py-12">
+    <div className="w-full lg:grid lg:min-h-screen lg:grid-cols-2">
+      <div className="flex items-center justify-center py-12 min-h-screen">
         <div className="mx-auto grid w-[350px] gap-6">
-          <div className="grid gap-2 text-center">
+          <div className="text-center">
             <h1 className="text-3xl font-bold">Login</h1>
-            <p className="text-balance text-muted-foreground">
-              Enter your email below to login to your account
-            </p>
+            <p className="text-muted-foreground">Enter your email below to login..</p>
           </div>
           <div className="grid gap-4">
-            <div className="grid gap-2">
+            <div>
               <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
@@ -53,58 +50,40 @@ const Login = () => {
                 required
               />
             </div>
-            <div className="grid gap-2">
-              <div className="flex items-center">
+            <div>
+              <div className="flex justify-between">
                 <Label>Password</Label>
-                <Link
-                  to="/password/forgot"
-                  className="ml-auto inline-block text-sm underline"
-                >
-                  Forgot your password?
+                <Link to="/password/forgot" className="text-sm underline">
+                  Forgot password?
                 </Link>
               </div>
               <Input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                required
               />
             </div>
             {loading ? (
-              <SpecialLoadingButton content={"Loggin In"} />
+              <SpecialLoadingButton content="Logging In" />
             ) : (
-              <Button
-                onClick={() => handleLogin(email, password)}
-                className="w-full"
-              >
+              <Button onClick={handleLogin} className="w-full">
                 Login
               </Button>
             )}
-            <div className="text-center mt-4">
-              <p className="text-sm text-muted-foreground">
-                Don't have an account?{" "}
-                <Link
-                  to="/login"
-                  className="text-blue-500 hover:underline"
-                >
-                  Sign Up
-                </Link>
-              </p>
-            </div>
-            <div>
-        <h1 className="font-bold">Demo  Credentials :</h1>
-        <p> Email :  aashishas16@gmail.com</p>
-        <p> Password : Ashish@123</p>
-      </div>
+            <p className="text-sm text-center text-muted-foreground">
+              Don't have an account?{" "}
+              <Link to="/signup" className="text-blue-500 hover:underline">
+                Sign Up
+              </Link>
+            </p>
           </div>
         </div>
       </div>
       <div className="flex justify-center items-center bg-muted">
         <img src="/login.png" alt="login" />
-        
       </div>
-
-   
-    </div>  
+    </div>
   );
 };
 
