@@ -1,5 +1,10 @@
 
-# Portfolio-Ashish
+
+
+
+# PORTFOLIO_MERN_BACKEND
+
+This is the backend for a portfolio application built using the MERN stack. It provides APIs for managing users, timelines, messages, skills, software applications, and projects.
 
 This project consists of **three interconnected components**:
 
@@ -18,119 +23,89 @@ Together, these components create a **comprehensive portfolio solution**, combin
 
 ---
 
-## 🚀 Features
-
-- **React** – Library for building dynamic user interfaces  
-- **Vite** – Lightning-fast build tool  
-- **Tailwind CSS** – Utility-first CSS framework  
-- **Redux Toolkit** – State management made simple and scalable  
-- **ShadCn UI** – Beautiful UI components for React  
-- **ESLint** – Code quality and linting tool  
-- **Zod** – Schema validation library
-
----
-
-## 📁 Project Structure
+## Project Structure
 
 ```
-MAIN_PORTFOLIO/
-├── public/               # Static assets
-├── src/                  # Source code
-│   ├── components/       # Reusable React components
-│   ├── lib/              # Utility functions
-│   ├── styles/           # Global and component-specific styles
-│   ├── main.jsx          # Entry point
-│   └── index.css         # Tailwind CSS entry
-├── .env                  # Environment variables
-├── .eslintrc.cjs         # ESLint config
-├── .gitignore            # Ignore rules
-├── components.json       # UI component configuration
-├── index.html            # HTML entry
-├── jsconfig.json         # JS config for path aliases
-├── package.json          # Dependencies and scripts
-├── README.md             # Documentation
-└── tailwind.config.js    # Tailwind CSS config
+PORTFOLIO_MERN_BACKEND/
+├── app.js                 # Main application file
+├── server.js              # Server entry point
+├── package.json           # Project dependencies and scripts
+├── package-lock.json      # Dependency lock file
+├── .env                   # Environment variables
+├── .gitignore             # Git ignore file
+├── /config                # Configuration files
+│   └── config.env         # Environment configuration
+├── /database              # Database connection setup
+│   └── connection.js      # MongoDB connection logic
+├── /middlewares           # Middleware functions
+│   └── error.js           # Error handling middleware
+├── /routes                # API route handlers
+│   ├── userRouter.js      # User-related routes
+│   ├── timelineRouter.js  # Timeline-related routes
+│   ├── messageRouter.js   # Message-related routes
+│   ├── skillRouter.js     # Skill-related routes
+│   ├── softwareApplicationRouter.js # Software application routes
+│   └── projectRouter.js   # Project-related routes
+└── /controllers           # Controller logic for routes
+    └── ...                # Individual controllers for each route
 ```
 
----
+## Key Features
 
-## 📌 Projects
+- **User Management**: APIs for user authentication and profile management.
+- **Timeline**: APIs to manage timeline events.
+- **Messages**: APIs to handle user messages.
+- **Skills**: APIs to manage skills displayed on the portfolio.
+- **Projects**: APIs to manage portfolio projects.
+- **File Uploads**: Supports file uploads using `express-fileupload`.
+- **Environment Variables**: Managed using `dotenv`.
 
-### 📂 **Portfolio Maker Website**  
-🛠️ **Tech Stack**: React, Node.js, MongoDB, Tailwind CSS, ShadCn UI, Redux Toolkit  
-📅 **Duration**: Jan 2024 – Jun 2024  
+## Environment Variables
 
-#### 🔧 Key Features & Functionality:
-1. **Full-Stack Web App**  
-   Built an end-to-end portfolio builder allowing users to create, manage, and update their portfolios dynamically.
+The `.env` file contains sensitive information such as:
 
-2. **Secure Authentication**  
-   Implemented secure login functionality with JWT and bcrypt for both users and admin.
+- `CLOUDINARY_API_KEY`
+- `CLOUDINARY_API_SECRET`
+- `CLOUDINARY_CLOUD_NAME`
+- `MONGO_URI`
+- `JWT_SECRET_KEY`
+- `PORT`
 
-3. **Responsive UI & Role-Based Dashboards**  
-   Designed adaptive interfaces for mobile/desktop with **role-based access control (RBAC)** to separate user and admin privileges.
+Ensure this file is not shared publicly.
 
-4. **Admin Messaging System**  
-   Enabled users to send messages directly to the admin for feedback, queries, or support.
-
-5. **Resume & Portfolio Management**  
-   Users can upload and update their resume and portfolio sections directly through the dashboard.
-
-6. **CRUD Operations**  
-   Developed full **Create, Read, Update, Delete** functionality for:
-   - User Profiles  
-   - Resume Sections  
-   - Project Listings  
-   - Contact Messages
-
----
-
-## 🛠️ Installation
+## How to Run
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/portfolio-ashish.git
-   cd portfolio-ashish
+   git clone https://github.com/aashishas16/PORTFOLIO_MERN_BACKEND.git
    ```
-
 2. Install dependencies:
    ```bash
    npm install
    ```
-
-3. Start the development server:
+3. Create a `.env` file in the root directory and configure the required variables.
+4. Start the server:
    ```bash
-   npm run dev
+   npm start
    ```
+5. The backend will run on the port specified in the `.env` file (default: `8000`).
 
-4. Open your browser at [http://localhost:3000](http://localhost:3000)
+## Scripts
 
----
+- `npm start`: Starts the server.
+- `npm run dev`: Starts the server in development mode using `nodemon`.
 
-## 📜 Scripts
+## Dependencies
 
-- `npm run dev` – Start development server  
-- `npm run build` – Build for production  
-- `npm run lint` – Run ESLint checks
+- **Express**: Web framework for Node.js.
+- **Mongoose**: MongoDB object modeling tool.
+- **Cloudinary**: For managing media assets.
+- **JWT**: For authentication.
+- **dotenv**: For environment variable management.
 
----
+## License
 
-## 🔐 Environment Variables
-
-Create a `.env` file and configure:
-
-```
-VITE_BASE_URL=https://your-backend-api-url
-```
-
----
-
-## 📄 License
-
-This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for more details.
-
----
-
+This project is licensed under the MIT License.
 ## 🙏 Acknowledgments
 
 - [React](https://reactjs.org/)  
